@@ -30,8 +30,8 @@ def generate_launch_description():
         output="screen",
         remappings=[
             ("/imu", "/imu"),
-            ("/odom", "/odometry"),
-        ],
+            ("/odom", "/odom"),
+        ]
     )
 
     cartographer_occupancy_grid_node = Node(

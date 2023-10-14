@@ -2,7 +2,7 @@ bt_navigator:
   ros__parameters:
     use_sim_time: &default_use_sim_time True
     global_frame: map
-    robot_base_frame: base_link
+    robot_base_frame: base_footprint
     plugin_lib_names:
       - nav2_compute_path_to_pose_action_bt_node
       - nav2_compute_path_through_poses_action_bt_node
@@ -92,9 +92,9 @@ global_costmap:
   global_costmap:
     ros__parameters:
       global_frame: map
-      robot_base_frame: base_link
+      robot_base_frame: base_footprint
       use_sim_time: *default_use_sim_time
-      robot_radius: 0.35
+      robot_radius: 0.22
       resolution: 0.05
       lethal_cost_threshold: 50
       always_send_full_costmap: True
@@ -113,18 +113,20 @@ global_costmap:
           data_type: "LaserScan"
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
+        cost_scaling_factor: 3.0
+        inflation_radius: 0.3
 
 local_costmap:
   local_costmap:
     ros__parameters:
       global_frame: odom
-      robot_base_frame: base_link
+      robot_base_frame: base_footprint
       use_sim_time: *default_use_sim_time
       rolling_window: true
       width: 5
       height: 5
       resolution: 0.05
-      robot_radius: 0.35
+      robot_radius: 0.22
       always_send_full_costmap: True
       plugins: ["voxel_layer", "inflation_layer"]
       voxel_layer:
@@ -138,6 +140,8 @@ local_costmap:
           data_type: "LaserScan"
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
+        cost_scaling_factor: 3.0
+        inflation_radius: 0.3
 
 planner_server:
   ros__parameters:
@@ -158,7 +162,7 @@ behavior_server:
   ros__parameters:
     local_frame: odom
     global_frame: map
-    robot_base_frame: base_link
+    robot_base_frame: base_footprint
     use_sim_time: *default_use_sim_time
     behavior_plugins: ["spin", "backup", "drive_on_heading", "wait"]
     spin:

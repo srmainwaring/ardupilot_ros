@@ -1,5 +1,7 @@
 import os
 
+from ament_index_python.packages import get_package_share_directory
+
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, GroupAction
 from launch.substitutions import LaunchConfiguration
@@ -46,6 +48,14 @@ def generate_launch_description():
     # than `GZ_SIM_RESOURCE_PATH` to locate resources.
     if "GZ_SIM_RESOURCE_PATH" in os.environ:
         gz_sim_resource_path = os.environ["GZ_SIM_RESOURCE_PATH"]
+
+        gz_sim_resource_path += ':' + \
+            os.path.join(get_package_share_directory(
+                'turtlebot3_gazebo'), 'models') \
+            + ':' + \
+            os.path.join(get_package_share_directory(
+                'turtlebot3_gazebo'), '..')
+        os.environ["GZ_SIM_RESOURCE_PATH"] = gz_sim_resource_path
 
         if "SDF_PATH" in os.environ:
             sdf_path = os.environ["SDF_PATH"]
