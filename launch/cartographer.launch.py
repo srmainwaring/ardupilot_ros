@@ -28,10 +28,10 @@ def generate_launch_description():
             "cartographer.lua",
         ],
         output="screen",
-        remappings = [
+        remappings=[
             ("/imu", "/imu"),
             ("/odom", "/odometry"),
-        ]
+        ],
     )
 
     cartographer_occupancy_grid_node = Node(
