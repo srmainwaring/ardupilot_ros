@@ -75,6 +75,22 @@ bt_navigator:
     #   - nav2_back_up_cancel_bt_node
     #   - nav2_drive_on_heading_cancel_bt_node
 
+    error_code_name_prefixes:
+      - assisted_teleop
+      - backup
+      - compute_path
+      - dock_robot
+      - drive_on_heading
+      - follow_object
+      - follow_path
+      - nav_thru_poses
+      - nav_to_pose
+      - route
+      - spin
+      - smoother
+      - undock_robot
+      - wait
+
 # bt_navigator_navigate_through_poses_rclcpp_node:
 #   ros__parameters:
 #     use_sim_time: *default_use_sim_time
@@ -533,7 +549,7 @@ collision_monitor:
     observation_sources: ["scan"]
     scan:
       type: "scan"
-      topic: "scan"
+      topic: "/scan"
       min_height: 0.15
       max_height: 2.0
       enabled: true
